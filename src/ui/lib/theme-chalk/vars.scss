@@ -1,0 +1,87 @@
+/**
+ * 全局使用需要安装
+ * npm install sass-resources-loader --save-dev
+ *
+ * 并在 <style> 中加上 lang="scss" 如下：
+ * <style scoped lang="scss"></style>
+ */
+ @charset "UTF-8";
+
+ /**
+  * 主色
+  */
+ $main: #46A976;
+
+ /**
+  * 辅助色
+  */
+ $orangeRed: #ed7c5c; /* 橘红 */
+ $red: #f4513b;
+
+ /**
+  * 点缀色
+  */
+
+ /**
+  * 背景色
+  */
+ $back: #f4f7f9;
+
+ /**
+  * 线条色
+  */
+ $line: #ebeef5;
+
+ /**
+  * 中性色
+  */
+ $black: #303133; /* 黑色 */
+ $darkGray: #606266; /* 深灰 */
+ $gray: #909399; /* 灰色 */
+ $lightGray: #c0c4cc; /* 浅灰 */
+ $white: #ffffff; /* 白色 */
+ $lightGreen: #f7fdf8; /* 浅绿色 */
+
+/**
+ * 亚灰（它是一个偏蓝色的灰色）
+ * @date 2019/7/25
+ * @describ 版本迭代后，这个颜色与灰色合并了，但是页面中有用到的，所以不删除，不推荐使用
+ */
+ $subGray: $gray;
+
+ $colors: (
+   (selector: 'main', value: $main),
+   (selector: 'orangeRed', value: $orangeRed),
+   (selector: 'red', value: $red),
+   (selector: 'back', value: $back),
+   (selector: 'line', value: $line),
+   (selector: 'black', value: $black),
+   (selector: 'darkGray', value: $darkGray),
+   (selector: 'gray', value: $gray),
+   (selector: 'lightGray', value: $lightGray),
+   (selector: 'subGray', value: $subGray),
+   (selector: 'white', value: $white),
+   (selector: 'lightGreen', value: $lightGreen),
+
+   (selector: 'green', value: $main), /* 老版本中的绿色统一用主色 */
+ );
+
+
+ /**
+  * 需要全局使用，所以此处引用
+  *
+  * 字体大小
+  * 取值范围：10 ~ 20
+  */
+ .f0{font-size:0}
+ @for $i from 10 through 20 {
+  //  @if $i%2 == 0 {
+     .f#{$i}{font-size:#{$i}px}
+  //  }
+ }
+
+//  @media screen and (min-width: 1380px) {
+//     @for $i from 10 through 20 {
+//       .f#{$i}{font-size:#{$i * 2}px}
+//     }
+//   }

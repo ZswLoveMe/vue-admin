@@ -1,0 +1,182 @@
+/**
+ * 需要安装
+ * npm install node-sass --save-dev
+ * npm install sass-loader --save-dev
+ */
+ @charset "UTF-8";
+
+ @import "./vars";
+ @import "./mixins";
+
+ /* flex */
+ @import "./flex.css";
+
+/* 预设样式 */
+ @import "./style";
+
+/* 重置样式 */
+html,body{height:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);}/*App中需要设置*/
+body{font:14px/1.6 "Microsoft Yahei",Verdana,Arial,Helvetica,sans-serif;}
+*, *:before, *:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;word-wrap:break-word}
+body, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, form{margin:0}
+button{border:none;padding:6px 15px}
+ul, ol{margin:0;padding:0;list-style-type:none}
+i, em{font-style:normal}
+a{text-decoration:none}a:hover{text-decoration:none}
+
+input,select,textarea{vertical-align:middle;font-family:inherit; font-size:inherit; line-height:inherit;}
+input:-webkit-autofill{-webkit-box-shadow: 0 0 0px 1000px white inset}/*input聚焦后黄色背景清除*/
+input[type="button"], input[type="submit"], input[type="reset"] ,textarea{-webkit-appearance: none;outline:none}textarea{resize:none}/*去掉苹果默认样式*/
+button,input,optgroup,select,textarea{margin:0px;outline:none}
+
+ /* display */
+ .db{display:block}
+ .dib{display:inline-block}
+ .dn{display:none}
+
+ /* position */
+ .pr,
+ .z1,.z2,.z3,.z4,.z5
+ {position:relative}
+ .pa{position:absolute}
+ .pf{position:fixed}
+ .z1{z-index:1}.z2{z-index:2}.z3{z-index:3}.z4{z-index:4}.z5{z-index:5}
+ .oh{overflow:hidden}
+
+ /* h1 ~ h6 */
+ h1,h2,h3,h4,h5,h6{margin: 0; padding: 0; border: 0; font-size: 14px; font: inherit; vertical-align: baseline;}
+ h1{font-size:24px;}
+ h2{font-size:20px;}
+ h3{font-size:18px;}
+ h4{font-size:16px;}
+ h5{font-size:14px;}
+ h6{font-size:12px;}
+
+ /* width height */
+ .max{max-width:100%;}
+ .max img{max-width:100%;}
+
+ /* float */
+ .fl{float:left}
+ .fr{float:right}
+ .fn{float:none}
+
+ /* text-align */
+ .tl{text-align:left}
+ .tr{text-align:right}
+ .tc{text-align:center}
+
+ /* cursor */
+ .s{cursor:pointer;}
+
+ /* line-height */
+ .lh{line-height:1.0;}
+
+ /* background */
+ .bg{background:transparent;}
+
+ /* white-space */
+ .n{font-weight:normal;font-style:normal}
+ .b{font-weight:bold;}
+
+ /* 综合属性 */
+ .clear:after{display:table; content:''; clear:both} /* 清除浮动 */
+ .auto{margin-left:auto;margin-right:auto;float:none}/* 块居中 */
+ .scroll{overflow-y:auto; overflow-x:hidden; height:100%; -webkit-text-size-adjust:none;-webkit-overflow-scrolling:touch} /* 滚动条 */
+ .line{text-decoration:line-through}/* 中划线 */
+ .ell{text-overflow:ellipsis; white-space:nowrap; overflow:hidden}/* 单行文字溢出虚点显示 */
+ .no-click{pointer-events: none; color:$lightGray !important}/*元素禁止点击*/
+
+ .w{width: 100%;}
+ .h{height: 100%;}
+
+ /**
+  * color / background
+  */
+ @for $i from 1 through length($colors) {
+   $item: nth($colors, $i);
+
+   .c-#{map-get($item, selector)} {
+     color: map-get($item, value);
+   }
+   .bg-#{map-get($item, selector)}{
+     background-color:map-get($item, value)
+   }
+ }
+
+ /**
+  * padding/margin组合区间
+  * .p5-0{padding:5px 0px}/.m5-0{margin:5px 0px}
+  * 到
+  * .p20-0{padding:20px 0px}/.m20-0{margin:20px 0px}
+  */
+ $padding-margin: [0,5,10,15,20];
+ @each $i in $padding-margin {
+   @each $j in $padding-margin {
+     @if $j != $i{
+       .p#{$j}-#{$i} {
+         padding:px($j) px($i);
+       }
+       .m#{$j}-#{$i} {
+         margin:px($j) px($i);
+        }
+     }
+   }
+ }
+
+ /**
+  * margin / padding
+  * 取值范围：0~50中5的倍数
+  */
+ @for $i from 0 through 100 {
+   @if $i%5 == 0 {
+     .m#{$i}{margin:px($i)}
+     .p#{$i}{padding:px($i)}
+   }
+ }
+ @for $i from 0 through 100 {
+   @if $i%5 == 0 {
+     .mt#{$i}{margin-top:px($i)}
+     .mr#{$i}{margin-right:px($i)}
+     .mb#{$i}{margin-bottom:px($i)}
+     .ml#{$i}{margin-left:px($i)}
+     .pt#{$i}{padding-top:px($i)}
+     .pr#{$i}{padding-right:px($i)}
+     .pb#{$i}{padding-bottom:px($i)}
+     .pl#{$i}{padding-left:px($i)}
+   }
+ }
+
+ /**
+  * radius
+  * 取值范围：2~10
+  */
+ .r{border-radius:500px;}
+ @for $i from 2 through 10 {
+   @if $i%2 == 0 {
+     .r#{$i}{border-radius: px($i)}
+   }
+ }
+
+/**
+ * 宽度
+ * 取值范围：0~500中5的倍数
+ */
+@for $i from 0 through 500 {
+  @if $i%5 == 0 {
+    .w#{$i}{width:px($i) !important}
+  }
+}
+
+/**
+ * 高度
+ * 取值范围：0~200中5的倍数
+ */
+@for $i from 0 through 200 {
+  @if $i%5 == 0 {
+    .h#{$i}{height:px($i)}
+  }
+}
+
+
+
